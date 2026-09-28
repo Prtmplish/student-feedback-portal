@@ -1,0 +1,12 @@
+{
+  "name": "student-feedback-portal",
+  "version": "0.1.0",
+  "description": "Demo app for the 5 Levels of Claude & Claude Code training",
+  "private": true,
+  "scripts": {
+    "dev": "node src/server.js",
+    "test": "node --test",
+    "lint": "node scripts/lint.js",
+    "report": "node scripts/report.js"
+  }
+}
