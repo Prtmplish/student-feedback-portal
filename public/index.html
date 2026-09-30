@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Feedback Portal</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 860px; margin: 2rem auto; padding: 0 1rem; color: #222; }
+    h1 { margin-bottom: .25rem; }
+    form { display: grid; gap: .5rem; grid-template-columns: 1fr 1fr; margin: 1.5rem 0; }
+    form textarea, form button { grid-column: span 2; }
+    input, select, textarea, button { padding: .5rem; font: inherit; }
+    button { background: #1f3864; color: #fff; border: 0; cursor: pointer; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: .5rem; border-bottom: 1px solid #ddd; }
+    #errors { color: #b00020; }
+  </style>
+</head>
+<body>
+  <h1>Student Feedback Portal</h1>
+  <p>Share feedback on today's session.</p>
+
+  <form id="form">
+    <input name="name" placeholder="Name" required>
+    <input name="rollNo" placeholder="Roll no. (e.g. BCA12345)" required>
+    <select name="rating">
+      <option value="5">5 - Excellent</option><option value="4">4 - Good</option>
+      <option value="3">3 - Okay</option><option value="2">2 - Poor</option><option value="1">1 - Bad</option>
+    </select>
+    <span></span>
+    <textarea name="comment" rows="3" placeholder="Comment (optional)"></textarea>
+    <button type="submit">Submit feedback</button>
+  </form>
+  <div id="errors"></div>
+
+  <h2>Responses</h2>
+  <table>
+    <thead><tr><th>Name</th><th>Roll no.</th><th>Rating</th><th>Comment</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <script>
+    async function load() {
+      const data = await (await fetch('/api/feedback')).json();
+      document.getElementById('rows').innerHTML = data.map(f =>
+        `<tr><td>${f.name}</td><td>${f.rollNo}</td><td>${f.rating}</td><td>${f.comment || ''}</td></tr>`).join('');
+    }
+    document.getElementById('form').addEventListener('submit', async e => {
+      e.preventDefault();
+      const body = Object.fromEntries(new FormData(e.target));
+      const res = await fetch('/api/feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      const out = await res.json();
+      document.getElementById('errors').textContent = res.ok ? '' : out.errors.join(' • ');
+      if (res.ok) { e.target.reset(); load(); }
+    });
+    load();
+  </script>
+</body>
+</html>
