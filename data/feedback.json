@@ -1,0 +1,8 @@
+[
+  { "id": 1, "name": "Ananya Das", "rollNo": "BCA23011", "rating": 5, "comment": "Loved the live demo", "createdAt": "2026-10-01T10:15:00.000Z" },
+  { "id": 2, "name": "Rohan Sen", "rollNo": "BCA23027", "rating": 4, "comment": "Good pace, more examples please", "createdAt": "2026-10-01T10:18:00.000Z" },
+  { "id": 3, "name": "Priya Ghosh", "rollNo": "BSC22104", "rating": 3, "comment": "", "createdAt": "2026-10-01T10:20:00.000Z" },
+  { "id": 4, "name": "Arjun Paul", "rollNo": "BCA23040", "rating": 5, "comment": "Clear explanation, \"best session\" so far", "createdAt": "2026-10-01T10:22:00.000Z" },
+  { "id": 5, "name": "Sneha Roy", "rollNo": "BDES2201", "rating": 4, "comment": "Slides were helpful, thanks", "createdAt": "2026-10-01T10:25:00.000Z" },
+  { "id": 6, "name": "Kunal Bose", "rollNo": "BCA23052", "rating": 2, "comment": "Audio was unclear at the back", "createdAt": "2026-10-01T10:31:00.000Z" }
+]
