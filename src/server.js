@@ -3,6 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const { validateFeedback } = require('./lib/validate');
 const store = require('./lib/store');
+const { toCsv } = require('./lib/csv');
 
 const PORT = process.env.PORT || 3000;
 
@@ -19,6 +20,15 @@ const server = http.createServer((req, res) => {
 
   if (req.method === 'GET' && req.url === '/api/feedback') {
     return sendJson(res, 200, store.readAll());
+  }
+
+  if (req.method === 'GET' && req.url === '/api/feedback.csv') {
+    res.writeHead(200, {
+      'Content-Type': 'text/csv; charset=utf-8',
+      'Content-Disposition': 'attachment; filename="feedback.csv"'
+    });
+    // The BOM lets Excel detect UTF-8 so non-ASCII names display correctly.
+    return res.end('﻿' + toCsv(store.readAll()));
   }
 
   if (req.method === 'POST' && req.url === '/api/feedback') {

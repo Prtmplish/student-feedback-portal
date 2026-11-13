@@ -6,3 +6,7 @@ A tiny Node.js app (no dependencies) where students submit feedback and teachers
 - `npm test` – run tests
 - `npm run lint` – basic lint
 - `npm run report` – print a feedback summary
+
+## Credits
+
+Developed by Webguru.
